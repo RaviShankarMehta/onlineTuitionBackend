@@ -15,7 +15,12 @@ app.use(
   })
 );
 app.use(cookieParser())
-
+app.get("/home", async (req, res, next) => {
+  return res.status(200).json({
+    title: "Express Testing",
+    message: "The app is working properly!",
+  });
+});
 // Importing & Using Routes
 import course from "./routes/courseRoutes.js";
 import user from "./routes/userRoutes.js";
