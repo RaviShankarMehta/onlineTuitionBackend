@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "[my-framework] build --output public"
+    
   },
   "author": "",
   "license": "ISC",
