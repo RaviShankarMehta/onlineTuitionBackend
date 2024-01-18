@@ -26,9 +26,9 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
   }
 });
 
-// app.get("/home", function(req, res) {
-//   res.send("Hello, this is the home page!");
-// });
+app.get("/home", function(req, res) {
+  res.send("Hello, this is the home page!");
+});
 // const temp = async () => {
 //   await Stats.create({});
 // };
