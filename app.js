@@ -15,7 +15,7 @@ app.use(
   })
 );
 app.use(cookieParser())
-app.get("/home", function(req, res) {
+app.get("/", function(req, res) {
   res.send("Hello, this is the home page!");
 });
 // Importing & Using Routes
