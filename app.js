@@ -33,8 +33,6 @@ app.use("/api/v1", course);
 app.use("/api/v1", user);
 app.use("/api/v1", payment);
 app.use("/api/v1", other);
-app.get("/", function(req, res) {
-  res.send("Hello, this is the home page!");
-});
+
 app.use(ErrorMiddleware);
 export default app;
