@@ -33,6 +33,6 @@ app.get("/", function(req, res) {
 //   await Stats.create({});
 // };
 // temp();
-app.listen(4000, () => {
-  console.log(`Server is up PORT:${4000}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is up PORT:${process.env.PORT}`);
 });
