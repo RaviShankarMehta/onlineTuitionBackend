@@ -15,6 +15,9 @@ app.use(
   })
 );
 app.use(cookieParser())
+app.get("/home", function(req, res) {
+  res.send("Hello, this is the home page!");
+});
 // Importing & Using Routes
 import course from "./routes/courseRoutes.js";
 import user from "./routes/userRoutes.js";
