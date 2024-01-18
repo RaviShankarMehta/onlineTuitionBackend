@@ -15,22 +15,19 @@ app.use(
   })
 );
 app.use(cookieParser())
-app.get("/home", async (req, res, next) => {
-  return res.status(200).json({
-    title: "Express Testing",
-    message: "The app is working properly!",
-  });
-});
+
 // Importing & Using Routes
 import course from "./routes/courseRoutes.js";
 import user from "./routes/userRoutes.js";
 import payment from "./routes/paymentRoutes.js";
 import other from "./routes/otherRoutes.js";
+import home from "./routes/home.js";
 
 app.use("/api/v1", course);
 app.use("/api/v1", user);
 app.use("/api/v1", payment);
 app.use("/api/v1", other);
+app.use("/homes", home);
 
 app.use(ErrorMiddleware);
 export default app;
