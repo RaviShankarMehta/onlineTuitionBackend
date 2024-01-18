@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "name":"onlinetuitionbackend",
     "builds": [
       {
         "src": "server.js",
@@ -10,7 +11,7 @@
       
       {
         "src": "/(.*)",
-        "dest": "/"
+        "dest": "/server.js"
       }
     ]
   }
