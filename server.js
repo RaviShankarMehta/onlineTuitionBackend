@@ -26,7 +26,7 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
   }
 });
 
-app.get("/", (req, res)=> {
+app.get("/", (req, res) => {
   res.send("<h1>Hello, this is the home page!</h1>");
 });
 // const temp = async () => {
