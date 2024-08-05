@@ -5,7 +5,14 @@ import Razorpay from "razorpay";
 import nodeCron from "node-cron";
 import { Stats } from "./models/stats.js";
 
-connectDB();
+// Connect to the database
+connectDB()
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch((error) => {
+    console.error("Database connection failed", error);
+  });
 
 cloudinary.v2.config({
   cloud_name: `${process.env.CLOUDINARY_NAME}`,
@@ -33,6 +40,12 @@ app.get("/", (req, res) => {
 //   await Stats.create({});
 // };
 // temp();
-app.listen(process.env.PORT, () => {
-  console.log(`Server is up PORT:${process.env.PORT}`);
-});
+// Start the server
+const PORT = process.env.PORT || 4000;
+app
+  .listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  })
+  .on("error", (err) => {
+    console.error("Server startup error:", err);
+  });
