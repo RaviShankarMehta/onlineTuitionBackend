@@ -44,10 +44,10 @@ router
   .put(isAuthenticated, singleUpload, updateProfilePic);
 
 // Forgot Password
-router.route("/forgotPassword").post(isAuthenticated, forgotPassword);
+router.route("/forgetPassword").post(forgotPassword);
 
 // Reset Password
-router.route("/resetPassword/:token").put(isAuthenticated, resetPassword);
+router.route("/resetPassword/:token").put(resetPassword);
 
 // Add to playlist
 router.route("/addToPlaylist").post(isAuthenticated, addToPlaylist);
