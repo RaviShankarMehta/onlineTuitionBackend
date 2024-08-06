@@ -16,13 +16,13 @@ import {
   deleteUser,
   deleteMyProfile,
 } from "../controllers/userController.js";
-import {authorizedAdmin, isAuthenticated} from "../middlewares/auth.js";
+import { authorizedAdmin, isAuthenticated } from "../middlewares/auth.js";
 import singleUpload from "../middlewares/multer.js";
 
 const router = express.Router();
 
 // Register
-router.route("/register").post(singleUpload,register);
+router.route("/register").post(singleUpload, register);
 
 // Login
 router.route("/login").post(login);
@@ -36,10 +36,12 @@ router.route("/getMyProfile").get(isAuthenticated, getMyProfile);
 router.route("/changePassword").put(isAuthenticated, changePassword);
 
 // Update Profile
-router.route("/updateProfile").put(isAuthenticated,singleUpload, updateProfile);
+router.route("/updateProfile").put(isAuthenticated, updateProfile);
 
 // Update Profile Picture
-router.route("/updateProfilePic").put(isAuthenticated, updateProfilePic);
+router
+  .route("/updateProfilePic")
+  .put(isAuthenticated, singleUpload, updateProfilePic);
 
 // Forgot Password
 router.route("/forgotPassword").post(isAuthenticated, forgotPassword);
@@ -55,14 +57,18 @@ router.route("/removeFromPlaylist").delete(isAuthenticated, removeFromPlaylist);
 
 // Admin Routes
 // Get All User
-router.route("/admin/users").get(isAuthenticated,authorizedAdmin,getAllUsers)
+router.route("/admin/users").get(isAuthenticated, authorizedAdmin, getAllUsers);
 
 // Update User Role
-router.route("/admin/updateUserRole/:id").put(isAuthenticated,authorizedAdmin,updateUserRole)
+router
+  .route("/admin/updateUserRole/:id")
+  .put(isAuthenticated, authorizedAdmin, updateUserRole);
 
 // Delete User
-router.route("/admin/deleteUser/:id").delete(isAuthenticated,authorizedAdmin,deleteUser)
+router
+  .route("/admin/deleteUser/:id")
+  .delete(isAuthenticated, authorizedAdmin, deleteUser);
 
 // Delete My Profile
-router.route("/deleteMyProfile").delete(isAuthenticated,deleteMyProfile)
+router.route("/deleteMyProfile").delete(isAuthenticated, deleteMyProfile);
 export default router;

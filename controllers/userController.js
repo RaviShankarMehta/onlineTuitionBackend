@@ -109,6 +109,9 @@ export const updateProfile = catchAsyncError(async (req, res, next) => {
 // UPDATE PROFILE PIC
 export const updateProfilePic = catchAsyncError(async (req, res, next) => {
   const file = req.file;
+  if (!file) {
+    return next(new ErrorHandler("Please upload the file", 400));
+  }
   const user = await User.findById(req.user._id);
 
   const fileUri = getDateUri(file);
