@@ -43,7 +43,8 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
   const isAuthentic = generated_signature === razorpay_signature;
 
   if (!isAuthentic)
-    return res.redirect(`${process.env.FRONTEND_URL}/paymentFailed`);
+    // return res.redirect(`${process.env.FRONTEND_URL}/paymentFailed`);
+    return res.redirect(`${process.env.FRONTEND_L0CAL_URL}/paymentFailed`);
 
   await Payment.create({
     razorpay_payment_id,
@@ -55,7 +56,8 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
 
   await user.save();
   res.redirect(
-    `${process.env.FRONTEND_URL}/paymentSuccess?reference=${razorpay_payment_id}`
+    // `${process.env.FRONTEND_URL}/paymentSuccess?reference=${razorpay_payment_id}`
+    `${process.env.FRONTEND_L0CAL_URL}/paymentSuccess?reference=${razorpay_payment_id}`
   );
 });
 
@@ -85,7 +87,7 @@ export const cancelSubscription = catchAsyncError(async (req, res, next) => {
     refund = true;
   }
 
-  await payment.remove();
+  await Payment.deleteOne({ _id: payment._id });
   user.subscription.id = undefined;
   user.subscription.status = undefined;
   await user.save();
