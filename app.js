@@ -19,7 +19,8 @@ app.use(cookieParser());
 app.use(
   cors({
     // origin: process.env.FRONTEND_L0CAL_URL,
-    origin: process.env.FRONTEND__URL,
+    origin:
+      process.env.FRONTEND__URL || "https://online-tuition-frontend.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
