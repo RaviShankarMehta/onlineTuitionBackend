@@ -275,12 +275,41 @@ export const deleteMyProfile = catchAsyncError(async (req, res, next) => {
     });
 });
 
-User.watch().on("change", async () => {
-  const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
-  const subscription = await User.find({ "subscription.status": "active" });
-  stats[0].users = await User.countDocuments();
-  stats[0].subscription = await User.subscription.length;
-  stats[0].createdAt = new Date(Date.now());
+// User.watch().on("change", async () => {
+//   const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
+//   const subscription = await User.find({ "subscription.status": "active" });
+//   stats[0].users = await User.countDocuments();
+//   stats[0].subscription = await User.subscription.length;
+//   stats[0].createdAt = new Date(Date.now());
 
-  await stats[0].save();
+//   await stats[0].save();
+// });
+
+User.watch().on("change", async () => {
+  try {
+    const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
+    const activeSubscriptions = await User.find({
+      "subscription.status": "active",
+    });
+
+    const userCount = await User.countDocuments();
+    const activeSubscriptionCount = activeSubscriptions.length;
+
+    if (stats.length > 0) {
+      stats[0].users = userCount;
+      stats[0].subscription = activeSubscriptionCount;
+      stats[0].createdAt = new Date(Date.now());
+      await stats[0].save();
+    } else {
+      // If no stats record exists, create a new one
+      const newStat = new Stats({
+        users: userCount,
+        subscription: activeSubscriptionCount,
+        createdAt: new Date(Date.now()),
+      });
+      await newStat.save();
+    }
+  } catch (error) {
+    console.error("Error updating stats:", error);
+  }
 });
