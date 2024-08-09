@@ -12,14 +12,15 @@ import { Stats } from "../models/stats.js";
 export const register = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
   const file = req.file;
-
   if (!name || !email || !password || !file) {
     return next(new ErrorHandler("Please enter all field", 400));
   }
   let user = await User.findOne({ email });
+
   if (user) return next(new ErrorHandler("User Already Exist.", 409));
   //   Upload file on cloudinary
   const fileUri = getDateUri(file);
+
   const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
   user = await User.create({
     name,

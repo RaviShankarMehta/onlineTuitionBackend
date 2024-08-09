@@ -83,13 +83,13 @@ export const getDashboardStats = catchAsyncError(async (req, res, next) => {
     success: true,
     stats: statsData,
     usersCount,
-    viewsCount,
     subscriptionsCount,
-    usersPercentage,
-    viewsPercentage,
+    viewsCount,
     subscriptionsPercentage,
-    usersProfit,
-    viewsProfit,
+    viewsPercentage,
+    usersPercentage,
     subscriptionsProfit,
+    viewsProfit,
+    usersProfit,
   });
 });
